@@ -18,19 +18,59 @@
 
  <script type="text/babel">
 
-    function Button() {
-      const[total, setTotal] = React.useState(0);
-      return <button onClick={() => setTotal(total + 1)}>Adicionar {total}</button>;
-    }
+  // Function Component
+  const Button = () => {
+    return <button>Buy</button>
+  }
 
-    function App() {
-        return <div>
-          <h1>React App</h1>
-          <Button />
-          <Button />
-          <Button />
-          </div>;
-    }
+  const MainNav = () => {
+    return <nav>
+      <ul>
+      <li><a href="#">Link1</a></li>
+      <li><a href="#">Link2</a></li>
+      </ul>
+     </nav>
+  }
+  //Podemos atribuir eventos diretamente aos elementos.
+  const Produtos = () => {
+    function handleClick(event) {
+    console.log('Comprou: ' + event.target.innerText);
+  }
+
+    return (
+      <div>
+      <button onClick={handleClick}>Camisa</button>
+      <button onClick={handleClick}>Bermuda</button>
+    </div>
+    )
+  }
+
+//Utilizamos o React pela facilidade de sincronização do estado. Os Hooks são funções especiais de React, o useState possibilita a sincronização do estado.
+const Compras = () => {
+  // useState é um Hook que define uma variável reativa
+  const [count, setCount] = React.useState(0);
+
+  return (
+    <div>
+      <button onClick={() => setCount(count + 1)}>Comprar: {count}</button>
+      <p>Total: {count}</p>
+      <p>Preço: R$ {count * 250}</p>
+    </div>
+  );
+};
+
+  const App = () => {
+    return <div>
+      <MainNav />
+      <Button />
+      <Produtos />
+      <Compras />
+    </div>
+  }
+
+
+
+
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(<App />);
 
