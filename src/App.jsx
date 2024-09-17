@@ -22,7 +22,6 @@ const mario = {
   ],
   ativa: false,
 };
-
 const App = () => {
   const dados = mario ;
 
