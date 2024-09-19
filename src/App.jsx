@@ -1,14 +1,13 @@
 import React from 'react';
+import Footer from './Footer'
+import Form from "./Form/Form"
 
 const App = () => {
-  function handleClick(event) {
-    alert('Comprou: ' + event.target.innerText);
-  }
-
   return (
     <div>
-      <button onClick={handleClick}>Camisa</button>
-      <button onClick={handleClick}>Bermuda</button>
+      
+      <Form />
+      <Footer />
     </div>
   );
 };
