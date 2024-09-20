@@ -1,30 +1,29 @@
 import React from 'react';
-import Footer from './Footer'
-import Form from "./Form/Form"
+import Produto from './Produto';
 
 const App = () => {
-  const [ativo, setAtivo] = React.useState(false);
-  const [dados, setDados] = React.useState({nome: "Andre", idade: "30"});
-  // É a mesma coisa que:
-  // const ativoArray = React.useState(true);
-  // const ativo = ativoArray[0];
-  // const setAtivo = ativoArray[1];
+  const [dados, setDados] = React.useState(null);
+  const [carregando, setCarregando] = React.useState(null);
 
-  function handleClick(){
-    setAtivo(!ativo);
-    setDados({...dados, faculdade: "Possui faculdade"})
-
+  async function handleClick(event) {
+    setCarregando(true);
+    const response = await fetch(
+      `https://ranekapi.origamid.dev/json/api/produto/${event.target.innerText}`,
+    );
+    const json = await response.json();
+    setDados(json);
+    setCarregando(false);
   }
 
   return (
-    <div>
-      <p>{dados.nome}</p>
-      <p>{dados.idade}</p>
-      <p>{dados.faculdade}</p>
-      <button onClick={handleClick}>{ativo ? 'Botão Ativo' : 'Botão Inativo'}</button>
-    </div>
+    <>
+      <button style={{margin:".5rem"}} onClick={handleClick}>smartphone</button>
+      <button style={{margin:".5rem"}} onClick={handleClick}>tablet</button>
+      <button style={{margin:".5rem"}} onClick={handleClick}>notebook</button>
+      {carregando && <p>Carregando...</p>}
+      {!carregando && dados && <Produto dados={dados} />}
+    </>
   );
 };
 
-
-export default App
+export default App;
